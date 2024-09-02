@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}
+Excluir Tudo
+{% endblock page_title %}
+{% block content %}
+    <h1>Excluir Medico</h1>
+    <p>Tem Certeza Que Deseja Excluir o Medico?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="sumit" class="btn btn-danger">Excluir</button>
+        <a href="{% url "list_med" %}" class="btn btn-primary">Cancelar</a>
+    </form>
+{% endblock content %}

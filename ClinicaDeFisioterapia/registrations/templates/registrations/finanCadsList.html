@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}
+  Lista De finanças
+{% endblock page_title %}
+{% block content %}
+      <h1>Lista de Finanças</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Receita</th>
+            <th scope="col">Despezas</th>
+            <th scope="col">Mês do Pagamento</th>  
+            <th scope="col">OBS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registrations in registrations %}
+          <tr>
+            <th scope="row">{{registrations.pk}}</th>
+            <td>{{registrations.receita}}</td>
+            <td>{{registrations.despezas}}</td>
+            <td>{{registrations.mesP}}</td>
+            <td>{{registrations.obs}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock  %}  

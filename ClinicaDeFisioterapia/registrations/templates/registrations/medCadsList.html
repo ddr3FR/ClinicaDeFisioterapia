@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block page_title %}
+  Lista De Medicos
+{% endblock page_title %}
+{% block content %}
+      <h1>Lista de Medicos</h1>
+      {% if registrations %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Data de Nascimento</th>  
+            <th scope="col">CEP</th>
+            <th scope="col">Tel</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Salario</th>
+            <th scope="col">Pagamento do mês</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registrations in registrations %}
+          <tr>
+            <th scope="row">{{registrations.pk}}</th>
+            <td>{{registrations.medicoName}}</td>
+            <td>{{registrations.medicoCPF}}</td>
+            <td>{{registrations.medicoDateNasc}}</td>
+            <td>{{registrations.medicoCEP}}</td>
+            <td>{{registrations.medicoTel}}</td>
+            <td>{{registrations.medicoEmail}}</td>
+            <td>R$: {{registrations.salario}}</td>
+            <td>{{registrations.pagMes|default:"A pagar"}}</td>
+            <td>
+              <a href="#" class="btn btn-primary btn-sm">Pagar</a>
+              <a href="{% url "update_medico" registrations.pk%}" class="btn btn-warning btn-sm">Edita</a>
+              <a href="{% url "delete_medico" registrations.pk%}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+          <p>Sem Fisioterapeutas cadastrados</p>
+      {% endif %}
+      <a href="{% url "register_medico" %}" class="btn btn-primary">Novo Cadastro de Medíco</a>
+      
+{% endblock  %}  
+    

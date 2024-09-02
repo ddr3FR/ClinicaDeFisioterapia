@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block page_title %}
+  Lista De Pacientes
+{% endblock page_title %}
+{% block content %}
+      <h1>Lista de Pacientes</h1>
+      {% if registrations %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Data de Nascimento</th>  
+            <th scope="col">CEP</th>
+            <th scope="col">Tel</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Mensalidade</th>
+            <th scope="col">Pagamento do mês</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registrations in registrations %}
+          <tr>
+            <th scope="row">{{registrations.pk}}</th>
+            <td>{{registrations.pacienteName}}</td>
+            <td>{{registrations.pacienteCPF}}</td>
+            <td>{{registrations.pacienteDateNasc}}</td>
+            <td>{{registrations.pacienteCEP}}</td>
+            <td>{{registrations.pacienteTel}}</td>
+            <td>{{registrations.pacienteEmail}}</td>
+            <td>R$: {{registrations.mensalidade}}</td>
+            <td>{{registrations.pagMes|default:"A pagar"}}</td>
+            <td>
+              <a href="{% url "updade_paciente" registrations.pk %}" class="btn btn-warning btn-sm">Atualizar</a>
+              <a href="{% url "delete_paciente" registrations.pk%}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+          <p>Sem Pacientes cadastrados</p>
+      {% endif %}
+      <a href="{% url "register_paciente" %}" class="btn btn-primary">Novo Cadastro de Paciente</a>
+      
+{% endblock  %}  
+    

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block page_title %}
+  Lista De Consultas
+{% endblock page_title %}
+{% block content %}
+      <h1>Lista de Cosnultas</h1>
+      {% if registrations %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome do Paciente</th>
+            <th scope="col">CPF do Paciente</th>
+            <th scope="col">Nome do Medico</th>  
+            <th scope="col">Data e hora</th>
+            <th scope="col">Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registrations in registrations %}
+          <tr>
+            <th scope="row">{{registrations.pk}}</th>
+            <td>{{consulta.nome_paciente.pacienteName}}</td>
+            <td>{{registrations.cpf_paciente}}</td>
+            <td>{{registrations.nome_medico}}</td>
+            <td>{{registrations.data_hora}}</td>
+            <td>{{registrations.obs}}</td>
+            
+            <td>
+              <a href="{% url "delete_consulta" registrations.pk%}" class="btn btn-danger btn-sm">Cancelar</a>
+              <a href="{% url "update_consulta" registrations.pk%}" class="btn btn-warning btn-sm">Remarca</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+          <p>nenhum consulta cadastrada</p>
+      {% endif %}
+      <a href="{% url "register_consulta" %}" class="btn btn-primary">Novo Cadastro de Consulta</a>
+      
+{% endblock  %}  
+    
